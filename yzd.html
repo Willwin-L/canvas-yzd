@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>圆围绕圆转动</title>
+        <style>
+                #canvas{border: 4px solid #ccc}
+        </style>
+</head>
+<body>
+        <canvas id="canvas" width="600" height="600"></canvas>
+
+        <script>
+                var can = document.getElementById('canvas');
+                var con = can.getContext('2d');
+                
+                var jiaodu = 0;
+                
+                function qiu(x,y,r,s){
+                        
+                        var z = r? r:4;
+                        var style = s? s:'style'
+                        
+                        con.fillStyle = style;
+                        con.beginPath()
+                        con.arc(x,y,z,0,2*Math.PI,false);
+                        con.fill()
+                }
+                
+                function drew(){
+                        con.save();
+                        con.clearRect(0,0,can.width,can.height);
+                        con.translate(can.width/2,can.height/2);
+                        
+                        qiu(0,0,90,'#66f');
+                        
+                        qiu(Math.cos(jiaodu)*100,Math.sin(jiaodu)*100,10);
+                        jiaodu+=0.1
+                        
+                        con.restore();
+                        window.requestAnimationFrame(drew)
+                }
+                
+                drew()
+        </script>
+</body>
+</html>
